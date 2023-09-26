@@ -1,0 +1,12 @@
+CREATE TABLE aluno (
+    matricula SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    nomemae VARCHAR(50) NOT NULL,
+    nomepai VARCHAR(50) NOT NULL,
+    sexo INTEGER NOT NULL,
+    logradouro VARCHAR(50),
+    numero INTEGER,
+    bairro VARCHAR(40),
+    cidade VARCHAR(40),
+    uf CHAR(2)
+);
