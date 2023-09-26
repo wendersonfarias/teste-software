@@ -17,11 +17,27 @@ public class ConexaoBD {
             Class.forName("org.h2.Driver");
             String url =  "jdbc:h2:~/test";
             con = DriverManager.getConnection(url,"sa","");
-            //criaTabelaDados(con);
+            apagaTabela();
+            criaTabelaDados(con);
         } catch (SQLException ex) {
             throw new PersistenciaException("Erro ao conectar o banco de dados - "+ex.toString());
         } catch (ClassNotFoundException ex) {
             throw new PersistenciaException("Driver do banco de dados não localizado - "+ex.toString());
+        }
+    }
+
+    public void apagaTabela() throws PersistenciaException {
+        try {
+            // Criar uma declaração SQL
+            Statement statement = con.createStatement();
+
+            // Executar o comando SQL para apagar a tabela
+            String dropTableSQL = "DROP TABLE IF EXISTS ALUNO";
+            statement.execute(dropTableSQL);
+
+            System.out.println("Tabela " + "ALUNO" + " apagada com sucesso.");
+        } catch (SQLException e) {
+            throw new PersistenciaException("Erro ao apagar a tabela - " + e.toString());
         }
     }
 
@@ -34,7 +50,7 @@ public class ConexaoBD {
                 Statement statement = con.createStatement();
 
                 // Executar o script SQL para criar a tabela
-                String createTableSQL = "CREATE TABLE aluno ( "+
+                String createTableSQL = "CREATE TABLE ALUNO ( "+
                                                             "matricula SERIAL PRIMARY KEY, "+
                                                             "nome VARCHAR(50) NOT NULL," +
                                                             "nomemae VARCHAR(50) NOT NULL, " +
